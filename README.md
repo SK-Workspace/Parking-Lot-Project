@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-# Parking-Lot-Challenge
-=======
+
 <h1>Parking Lot Challenge:</h1>
 <p>
 Create a parking lot class that takes in a square footage size as input and creates an array of empty values based on the input square footage size. Assume every parking spot is 8x12 (96 ft2) for this program, but have the algorithm that calculates the array size be able to account for different parking spot sizes. For example, a parking lot of size 2000ft2 can fit 20 cars, but if the parking spots were 10x12 (120 ft2), it could only fit 16 cars. The size of the array will determine how many cars can fit in the parking lot.
@@ -20,4 +18,4 @@ Output when a car does or does not park successfully to the terminal (Ex. "Car w
 
 OPTIONAL/BONUS - Create a method for the parking lot class that maps vehicles to parked spots in a JSON object. Call this method at the end of the program, save the object to a file, and upload the file to an input S3 bucket.
 </p>
->>>>>>> 9e053e3 (Initial commit from local to remote)
+
