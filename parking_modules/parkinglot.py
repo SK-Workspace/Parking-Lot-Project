@@ -1,5 +1,6 @@
 import json
 import boto3
+import traceback
 
 class ParkingLot:
     def __init__(self, total_size, spot_width=8, spot_length=12):
@@ -12,7 +13,7 @@ class ParkingLot:
     def available_spots(self):
         return self.parking_spots.count(None)
 
-    def uploadS3Object(self):
+    def uploadS3Object(self, **kwargs):
         # Create an object mapping vehicles to parked spots
         parked_cars = {}
         for i, spot in enumerate(self.parking_spots):
@@ -27,9 +28,13 @@ class ParkingLot:
             file.write(json_data)
         try:
             # Upload the file to S3 bucket and print success message in terminal
-            s3 = boto3.client('s3', aws_access_key_id='xxxx',aws_secret_access_key='xxx')
-            s3.upload_file('parked_cars.json', 'your-bucket-name', 'parked_cars.json')
-            print("\nThe details of the parked car(s) have been successfully \
-                uploaded to the Amazon S3 cloud storage. File name: 'parked_cars.json'\n")
+
+            s3 = boto3.client('s3', aws_access_key_id=kwargs['aws_access_key_id'],aws_secret_access_key=kwargs['aws_secret_access_key'])
+
+            s3.upload_file('parked_cars.json', kwargs['bucket'], kwargs['outputfilename'])
+            
+            print("\nThe details of the parked car(s) have been successfully uploaded to the Amazon S3 cloud storage. File name: 'parked_cars.json'\n")
+            
         except Exception as err:
             print(f"\n Oops...Somthing went wrong with S3 upload.\n Info: {err}\n ")
+            traceback.print_stack()
